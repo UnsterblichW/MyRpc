@@ -26,9 +26,18 @@
    cmake ..
    make -j4 #可以自行将并行编译的线程数调高一些
    ``` 
-   
 ------------------------------
 ## 本RPC使用流程
 1. 以example文件夹中的代码为例，需要利用protobuf的语法来定义需要序列化的消息格式，例如`user.proto`和`friend.proto`
 2. 用`protoc`命令通过`*.proto`文件生成业务逻辑所需的`*.pb.h`和`*.pb.cc`文件
 3. 在业务逻辑中重写函数，类似于`example/remote_process/UserService.cpp`之中对于`UserService`的实现
+------------------------------
+## 项目架构概述
+本项目的架构图如下：
+
+简述运行流程：
+1. MyRpc的服务端先启动，将会把自己支持的服务和方法注册到zookeeper里面去，服务注册的znode节点都是临时节点，zookeeper封装的客户端提供了心跳探测机制来确认这些rpc服务端是否存活；
+2. MyRpc的客户端后启动，先向zookeeper询问想要调用的远程方法的ip和端口；
+3. MyRpc的客户端向服务端发送的消息格式也是通过protobuf来定义的，可见`src/rpcheader.proto`，客户端按这个格式组装将要调用的远程方法的服务名、方法名、参数表，通过protobuf序列化成二进制字符串，然后通过muduo框架发送给MyRpc服务端；
+4. Muduo为MyRpc客户端和服务端之间的数据传输提供了保障，MyRpc服务端在收到二进制字符串后，先通过protobuf反序化得到客户端所需的服务名、方法名、参数表，执行对于的逻辑后，将处理得到的结果重新通过protobuf序列化成二进制字符串，发回给MyRpc客户端；
+5. MyRpc客户端收到服务端返回的表示远程调用结果的二进制字符串，用protobuf反序列化得到所需的数据。
