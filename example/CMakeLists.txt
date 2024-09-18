@@ -1,0 +1,2 @@
+#add_subdirectory(local_process)
+add_subdirectory(remote_process)
