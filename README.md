@@ -34,6 +34,7 @@
 ------------------------------
 ## 项目架构概述
 本项目的架构图如下：
+![image](https://github.com/UnsterblichW/MyRpc/blob/main/MyRpc%E6%A1%86%E6%9E%B6%E5%9B%BE.png)
 
 简述运行流程：
 1. MyRpc的服务端先启动，将会把自己支持的服务和方法注册到zookeeper里面去，服务注册的znode节点都是临时节点，zookeeper封装的客户端提供了心跳探测机制来确认这些rpc服务端是否存活；
