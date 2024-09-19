@@ -19,7 +19,7 @@ set(CPP_SOURCES
 
 add_library(myrpc ${CPP_SOURCES})
 
-target_link_libraries(myrpc muduo_net muduo_base pthread zookeeper_mt)
+target_link_libraries(myrpc muduo_net muduo_base pthread zookeeper_mt malog)
 
 
 
