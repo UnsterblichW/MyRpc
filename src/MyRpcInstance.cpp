@@ -8,6 +8,8 @@
 #include <iostream>
 #include <string>
 #include <unistd.h>
+#include <malog/logger.h>
+using namespace malog;
 
 MyRpcConfigMgr MyRpcInstance::m_config;
 
@@ -37,10 +39,14 @@ void MyRpcInstance::Init(int argc, char **argv) {
 
 	m_config.loadConfigFile(config_file.c_str());
 
-	std::cout << "rpcserverip:" << m_config.getRpcServerIp() << std::endl;
-	std::cout << "rpcserverport:" << m_config.getRpcServerPort() << std::endl;
-	std::cout << "zookeeperip:" << m_config.getZookeeperIp() << std::endl;
-	std::cout << "zookeeperport:" << m_config.getZookeeperPort() << std::endl;
+	// std::cout << "rpcserverip:" << m_config.getRpcServerIp() << std::endl;
+	// std::cout << "rpcserverport:" << m_config.getRpcServerPort() << std::endl;
+	// std::cout << "zookeeperip:" << m_config.getZookeeperIp() << std::endl;
+	// std::cout << "zookeeperport:" << m_config.getZookeeperPort() << std::endl;
+	Log::trace("rpcserverip: {}", m_config.getRpcServerIp());
+	Log::trace("rpcserverport: {}", m_config.getRpcServerPort());
+	Log::trace("zookeeperip: {}", m_config.getZookeeperIp());
+	Log::trace("zookeeperport: {}", m_config.getZookeeperPort());
 }
 
 MyRpcInstance &MyRpcInstance::getInstance() {

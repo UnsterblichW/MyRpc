@@ -1,0 +1,5 @@
+[2024-09-09 19:35:53 +08][TRACE][simple4.cc:11][func:main]: hello MyAsyncLog
+[2024-09-09 19:35:53 +08][DEBUG][simple4.cc:12][func:main]: hello MyAsyncLog
+[2024-09-09 19:35:53 +08][INFO][simple4.cc:13][func:main]: hello MyAsyncLog
+[2024-09-09 19:35:53 +08][WARN][simple4.cc:14][func:main]: hello MyAsyncLog
+[2024-09-09 19:35:53 +08][ERROR][simple4.cc:15][func:main]: hello MyAsyncLog
